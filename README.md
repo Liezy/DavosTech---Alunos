@@ -35,6 +35,7 @@ O Sistema de Gerenciamento de Estudantes (SMS) é uma aplicação web desenvolvi
 
 ## Estrutura do Projeto
 
+```
 davos/
 │
 ├── app/
