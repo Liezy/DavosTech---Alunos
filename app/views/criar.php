@@ -9,41 +9,44 @@
 </head>
 
 <body class="bg-gray-100">
-    
-<?php include './app/views/sidebar.php'; ?>
-
-    <div class="max-w-2xl mx-auto p-6">
+    <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4"><?= isset($estudante) ? 'Editar Estudante' : 'Adicionar Estudante' ?></h1>
-        <form action="<?= isset($estudante) ? '/davos/estudante/update/' . $estudante->id : '/davos/estudante/store' ?>" method="post"
-            class="space-y-4">
-            <div>
-                <label for="nome" class="block text-sm font-medium text-gray-700">Nome:</label>
-                <input type="text" id="nome" name="nome"
-                    value="<?= isset($estudante) ? htmlspecialchars($estudante->nome) : '' ?>"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required>
+        <form action="<?= isset($estudante) ? "/davos/estudante/update/{$estudante->id}" : "/davos/estudante/store" ?>" method="post">
+            <div class="mb-4">
+                <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+                <input type="text" id="nome" name="nome" class="mt-1 block w-full" value="<?= isset($estudante) ? htmlspecialchars($estudante->nome) : '' ?>" required>
             </div>
-
-            <div>
-                <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição:</label>
-                <textarea id="descricao" name="descricao"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    required><?= isset($estudante) ? htmlspecialchars($estudante->descricao) : '' ?></textarea>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full" value="<?= isset($estudante) ? htmlspecialchars($estudante->email) : '' ?>" required>
             </div>
-
-            <div class="flex items-center">
-                <input type="checkbox" id="ativo" name="ativo"
-                    class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" <?= isset($estudante) && $estudante->ativo ? 'checked' : '' ?>>
-                <label for="ativo" class="ml-2 block text-sm text-gray-900">Ativo</label>
+            <div class="mb-4">
+                <label for="telefone" class="block text-sm font-medium text-gray-700">Telefone</label>
+                <input type="text" id="telefone" name="telefone" class="mt-1 block w-full" value="<?= isset($estudante) ? htmlspecialchars($estudante->telefone) : '' ?>" required>
             </div>
-
+            <div class="mb-4">
+                <label for="valor_mensalidade" class="block text-sm font-medium text-gray-700">Valor da Mensalidade</label>
+                <input type="number" step="0.01" id="valor_mensalidade" name="valor_mensalidade" class="mt-1 block w-full" value="<?= isset($estudante) ? htmlspecialchars($estudante->valor_mensalidade) : '' ?>" required>
+            </div>
+            <div class="mb-4">
+                <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
+                <input type="password" id="senha" name="senha" class="mt-1 block w-full" value="<?= isset($estudante) ? htmlspecialchars($estudante->senha) : '' ?>" required>
+            </div>
+            <div class="mb-4">
+                <label for="observacao" class="block text-sm font-medium text-gray-700">Observação</label>
+                <textarea id="observacao" name="observacao" class="mt-1 block w-full"><?= isset($estudante) ? htmlspecialchars($estudante->observacao) : '' ?></textarea>
+            </div>
+            <div class="mb-4">
+                <label class="inline-flex items-center">
+                    <input type="checkbox" name="ativo" class="form-checkbox" <?= isset($estudante) && $estudante->ativo ? 'checked' : '' ?>>
+                    <span class="ml-2">Ativo</span>
+                </label>
+            </div>
             <div>
-                <button type="submit"
-                    class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Salvar
                 </button>
-                <a href="/davos"
-                    class="ml-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <a href="/estudante" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-300 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     Voltar para Lista
                 </a>
             </div>

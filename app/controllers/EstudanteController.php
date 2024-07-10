@@ -16,14 +16,16 @@ class EstudanteController extends Controller {
 
     public function store() {
         $estudante = new EstudanteModel();
-        
         $estudante->nome = $_POST['nome'];
-        $estudante->descricao = $_POST['descricao'];
+        $estudante->email = $_POST['email'];
+        $estudante->telefone = $_POST['telefone'];
+        $estudante->valor_mensalidade = $_POST['valor_mensalidade'];
+        $estudante->senha = $_POST['senha'];
         $estudante->ativo = isset($_POST['ativo']) ? 1 : 0;
-        
+        $estudante->observacao = $_POST['observacao'];
         $estudante->save();
         
-        header('Location: /davos');
+        header('Location: /davos/estudante');
     }
 
     public function edit($id) {
@@ -34,9 +36,17 @@ class EstudanteController extends Controller {
     public function update($id) {
         $estudante = (new EstudanteModel())->find($id);
         $estudante->nome = $_POST['nome'];
-        $estudante->descricao = $_POST['descricao'];
+        $estudante->email = $_POST['email'];
+        $estudante->telefone = $_POST['telefone'];
+        $estudante->valor_mensalidade = $_POST['valor_mensalidade'];
         $estudante->ativo = isset($_POST['ativo']) ? 1 : 0;
+        $estudante->observacao = $_POST['observacao'];
         $estudante->update();
+        header('Location: /davos');
+    }
+
+    public function delete($id) {
+        (new EstudanteModel())->delete($id);
         header('Location: /davos');
     }
 
@@ -44,12 +54,6 @@ class EstudanteController extends Controller {
         $estudante = (new EstudanteModel())->find($id);
         $estudante->ativo = !$estudante->ativo;
         $estudante->update();
-        header('Location: /davos');
-    }
-
-    public function delete($id) {
-        $estudanteModel = new EstudanteModel();
-        $estudanteModel->delete($id);
         header('Location: /davos');
     }
 }
